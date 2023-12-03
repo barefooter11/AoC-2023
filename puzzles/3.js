@@ -1,7 +1,9 @@
 import { readFileLines } from "../utils/input.js";
 
+const DAY = "3";
+
 const parseInputData = () => {
-  const lines = readFileLines("input/3.txt");
+  const lines = readFileLines(`input/${DAY}.txt`);
   return lines.map((line) => line.split(""));
 };
 
@@ -50,7 +52,7 @@ const processNeighboringNums = (i, j, data) => {
 };
 
 const solve = () => {
-  console.time("Day 3");
+  console.time(`Day ${DAY}`);
   const data = parseInputData();
 
   let total = 0;
@@ -73,7 +75,7 @@ const solve = () => {
   console.log(`Sum of all part numbers: ${total}`);
   console.log(`Sum of all gear ratios: ${gearTotal}`);
 
-  console.timeEnd("Day 3");
+  console.timeEnd(`Day ${DAY}`);
 };
 
 solve();

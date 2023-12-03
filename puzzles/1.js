@@ -1,5 +1,6 @@
 import { readFileLines } from "../utils/input.js";
 
+const DAY = "1";
 const replacements = [
   {
     from: "twone",
@@ -63,20 +64,29 @@ const replacements = [
   },
 ];
 
-const data = readFileLines("input/1.txt");
-console.time("Day 1");
-const nums = data.map((entry) => {
-  let numeric = entry;
-  for (let replacement of replacements) {
-    numeric = numeric.replaceAll(replacement.from, replacement.to);
-  }
-  const first = numeric.charAt(0);
-  const last = numeric.charAt(numeric.length - 1);
-  return Number(first + last);
-});
+const parseInputData = () => {
+  return readFileLines(`input/${DAY}.txt`);
+};
 
-const sum = nums.reduce((prev, current) => prev + current, 0);
+const solve = () => {
+  console.time(`Day ${DAY}`);
 
-console.log(`Total is ${sum}`);
+  const data = parseInputData();
+  const nums = data.map((entry) => {
+    let numeric = entry;
+    for (let replacement of replacements) {
+      numeric = numeric.replaceAll(replacement.from, replacement.to);
+    }
+    const first = numeric.charAt(0);
+    const last = numeric.charAt(numeric.length - 1);
+    return Number(first + last);
+  });
 
-console.timeEnd("Day 1");
+  const sum = nums.reduce((prev, current) => prev + current, 0);
+
+  console.log(`Total is ${sum}`);
+
+  console.timeEnd(`Day ${DAY}`);
+};
+
+solve();

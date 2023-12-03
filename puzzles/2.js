@@ -1,7 +1,9 @@
 import { readFileLines } from "../utils/input.js";
 
+const DAY = "2";
+
 const parseInputData = () => {
-  const games = readFileLines("input/2.txt");
+  const games = readFileLines(`input/${DAY}.txt`);
   return games.map((game) => {
     const [gameNumber, grabs] = game.split(": ");
     const gameId = Number(gameNumber.split(" ")[1]);
@@ -25,7 +27,8 @@ const parseInputData = () => {
 };
 
 const solve = () => {
-  console.time("Day 2");
+  console.time(`Day ${DAY}`);
+
   const MAX_RED = 12;
   const MAX_GREEN = 13;
   const MAX_BLUE = 14;
@@ -46,7 +49,7 @@ const solve = () => {
   console.log(`The total is ${result.total}`);
   console.log(`The total power is ${result.power}`);
 
-  console.timeEnd("Day 2");
+  console.timeEnd(`Day ${DAY}`);
 };
 
 solve();
