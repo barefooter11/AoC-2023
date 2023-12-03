@@ -25,6 +25,7 @@ const parseInputData = () => {
 };
 
 const solve = () => {
+  console.time("Day 2");
   const MAX_RED = 12;
   const MAX_GREEN = 13;
   const MAX_BLUE = 14;
@@ -44,6 +45,8 @@ const solve = () => {
 
   console.log(`The total is ${result.total}`);
   console.log(`The total power is ${result.power}`);
+
+  console.timeEnd("Day 2");
 };
 
 solve();
