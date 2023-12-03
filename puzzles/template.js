@@ -1,7 +1,9 @@
+import { readFileLines } from "../utils/input.js";
+
 const DAY = "x";
 
 const parseInputData = () => {
-  const lines = fs.readFileSync(`${DAY}.txt`).toString("UTF8").split("\n");
+  const lines = readFileLines(`input/${DAY}.txt`);
 };
 
 const solve = () => {
