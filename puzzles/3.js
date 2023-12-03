@@ -6,37 +6,39 @@ const parseInputData = () => {
 };
 
 const getNumberData = (i, j, data) => {
+  // find startIndex of number
   while (/\d/.test(data[i][j])) {
     j--;
   }
   const startIndex = ++j;
+
+  // find endIndex of number, tracking digits
   const digits = [];
   while (/\d/.test(data[i][j])) {
     digits.push(data[i][j++]);
   }
   const endIndex = --j;
-  const numberData = {
+
+  return {
     number: Number(digits.join("")),
     startIndex,
     endIndex,
   };
-  console.log(numberData);
-  return numberData;
 };
 
-const sumNeighboringNums = (i, j, data) => {
+const processNeighboringNums = (i, j, data) => {
   let sum = 0;
   let count = 0;
   let product = 1;
+  // Search all neighboring squares for numeric digits
   for (let x = i - 1; x <= i + 1; x++) {
     for (let y = j - 1; y <= j + 1; y++) {
       if (/\d/.test(data[x][y])) {
-        console.log(`Found digit ${data[x][y]} at ${x},${y}`);
-        const numberInfo = getNumberData(x, y, data);
-        sum += numberInfo.number;
-        product *= numberInfo.number;
+        const { number, endIndex } = getNumberData(x, y, data);
+        sum += number;
+        product *= number;
         count++;
-        y = numberInfo.endIndex;
+        y = endIndex;
       }
     }
   }
@@ -48,6 +50,7 @@ const sumNeighboringNums = (i, j, data) => {
 };
 
 const solve = () => {
+  console.time("Day 3");
   const data = parseInputData();
 
   let total = 0;
@@ -58,11 +61,8 @@ const solve = () => {
     for (let j = 0; j < data.length; j++) {
       const character = line[j];
       if (/[^.\d]/.test(character)) {
-        console.log(`Found symbol at ${i},${j}`);
-        const { sum, count, product } = sumNeighboringNums(i, j, data);
-        console.log(`Sum of neighboring numbers is ${sum}`);
+        const { sum, count, product } = processNeighboringNums(i, j, data);
         total += sum;
-
         if (character === "*" && count === 2) {
           gearTotal += product;
         }
@@ -70,8 +70,10 @@ const solve = () => {
     }
   }
 
-  console.log(total);
-  console.log(gearTotal);
+  console.log(`Sum of all part numbers: ${total}`);
+  console.log(`Sum of all gear ratios: ${gearTotal}`);
+
+  console.timeEnd("Day 3");
 };
 
 solve();
