@@ -64,13 +64,6 @@ const findMappings = (inputRanges, map) => {
             ? mapTargetEnd
             : mapTargetStart + (rangeEnd - mapSourceStart);
         matches.push([matchStart, matchEnd]);
-
-        if (rangeStart < mapSourceStart) {
-          recurseMatches.push([rangeStart, mapSourceStart - 1]);
-        }
-        if (rangeEnd > mapSourceEnd) {
-          recurseMatches.push([mapSourceEnd + 1, rangeEnd]);
-        }
       }
     }
     if (!matches.length) {
@@ -78,9 +71,7 @@ const findMappings = (inputRanges, map) => {
     }
   }
 
-  return recurseMatches.length > 0
-    ? matches.concat(findMappings(recurseMatches, map))
-    : matches;
+  return matches;
 };
 
 const solve = () => {
